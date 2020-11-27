@@ -1,208 +1,363 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "Paladin.h"
-#include "Hunter.h"
-#include "Wizard.h"
 
 using namespace std;
+
+#include "paladin.h"
+#include "hunter.h"
+#include "wizard.h"
+#include "spider.h"
+
+//Guard doesn't work, HP elevates a lot, gotta ask benji.
+//spider guard doesn´t guard gotta check that
 
 int main()
 {
 	int election;
-	int hp,atk,def,agi,mhp, init, matk, mdef, magi, damage, mdamage;
-	Paladin pal;
-	Hunter hun;
-	Wizard wiz;
-
-	matk = 10;
-	mdef = 15;
-	magi = 5;
+	int init;
+	string username;
+	
+	Paladin pala("Bill Ding");
+	Hunter hunt("Al E. Gater");
+	Wizard wiza("Otto Graf");
+	Spider spid("Hoo Lee Fuk");
 	
 	srand(unsigned(time(0)));
 	init = rand()%2+1;
-	mhp = rand()%100+100;
+	
 	cout << "...\n";
 	cout << "........\n";
 	cout << "................\n";
-	cout << "...............................\n";
+	cout << "............................\n";
 	cout << "'It's time to wake up...'\n";
 	cout << "'Open your eyes... Quickly!!!'\n";
 	cout << "The first thing you see... a enormous spider in front of YOU!\n\n";
-	cout << "Choose a class\n 1 -> Paladin \n 2 -> Hunter \n 3 -> Wizard \n";
+	cout << "Choose a class\n 1 -> Paladin \n 2 -> Hunter \n 3 -> Wizard \n\n";
+	
 	do{cin >> election;} while(election > 3 || election < 1);
 	switch(election)
 	{
-		case 1:
-			hp = rand()%70+80;
-			pal.set_atk(rand()%5+5);
-			pal.set_def(rand()%25+25);
-			pal.set_agi(15);
+		case 1:	
+			cout << " \n" << pala.getName() << " \n" << pala.getHealth()<< " Hp\n" << pala.getAttack() << " Str\n" << pala.getDefense()<< " Def\n" << pala.getMagic()<< " Mag\n" << endl;
+			cout << "\n";
+			cout << "'Let me help you, this is what I know of your opponent'\n";
+			cout <<  " \n" << "Name:\n" << spid.getName() << " \n" << spid.getHealth()<< " Hp\n" << spid.getAttack() << " Str\n" << spid.getDefense()<< " Def\n" << spid.getMagic()<< " Mag\n" << endl;
+			if (init == 1)
+			{
+				cout << "Your turn!\n";
+			}
+			while(pala.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Attack with Sword \n 2 -> Smite him \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						pala.Sword(spid);   //Preguntar a Benji como imprimir los dos randoms en stats
+						cout << " \n"<< "You did " << pala.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						pala.Smite(spid);
+						cout << " \n"<< "You did " << pala.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						pala.Guard(pala);
+						cout << " \n"<< "You blocked " << pala.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(pala);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(pala);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << pala.getHealth() <<"!\n";
+				if (pala.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+				else{
+					cout << "Your turn!\n";
+			while(pala.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Attack with Sword \n 2 -> Smite him \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						pala.Sword(spid);   //Preguntar a Benji como imprimir los dos randoms en stats
+						cout << " \n"<< "You did " << pala.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						pala.Smite(spid);
+						cout << " \n"<< "You did " << pala.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						pala.Guard(pala);
+						cout << " \n"<< "You blocked " << pala.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(pala);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(pala);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << pala.getHealth() <<"!\n";
+				if (pala.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+			}
+			}
 			break;
 		case 2:
-			hp = rand()%20+80;
-			hun.set_atk(rand()%15+15);
-			hun.set_def(rand()%15+15);
-			hun.set_agi(10);
+			cout << " \n" << hunt.getName() << " \n" << hunt.getHealth()<< " Hp\n" << hunt.getAttack() << " Str\n" << hunt.getDefense()<< " Def\n" << hunt.getMagic()<< " Mag\n" << endl;
+			cout << "\n";
+			cout << "'Let me help you, this is what I know of your opponent'\n";
+			cout <<  " \n" << "Name:\n" << spid.getName() << " \n" << spid.getHealth()<< " Hp\n" << spid.getAttack() << " Str\n" << spid.getDefense()<< " Def\n" << spid.getMagic()<< " Mag\n" << endl;
+			if (init == 1)
+			{
+				cout << "Your turn!\n";
+			}
+			while(hunt.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Shoot an arrow \n 2 -> Arcane Shot \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						hunt.Bow(spid);   //Preguntar a Benji como imprimir los dos randoms en stats
+						cout << " \n"<< "You did " << hunt.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						hunt.Arcane_Shot(spid);
+						cout << " \n"<< "You did " << hunt.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						hunt.Guard(hunt);
+						cout << " \n"<< "You blocked " << hunt.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(hunt);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(hunt);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << hunt.getHealth() <<"!\n";
+				if (hunt.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+				else{
+					cout << "Your turn!\n";
+			while(hunt.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Shoot an arrow \n 2 -> Arcane Shot \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						hunt.Bow(spid);   //Preguntar a Benji como imprimir los dos randoms en stats!!!
+						cout << " \n"<< "You did " << hunt.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						hunt.Arcane_Shot(spid);
+						cout << " \n"<< "You did " << hunt.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						hunt.Guard(hunt);
+						cout << " \n"<< "You blocked " << hunt.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(hunt);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(hunt);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << hunt.getHealth() <<"!\n";
+				if (hunt.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+			}
+			}
 			break;
 		case 3:
-			hp = rand()%20+80;
-			wiz.set_atk(rand()%30+30);
-			wiz.set_def(rand()%10+10);
-			wiz.set_agi(5);
+			cout << " \n" << wiza.getName() << " \n" << wiza.getHealth()<< " Hp\n" << wiza.getAttack() << " Str\n" << wiza.getDefense()<< " Def\n" << wiza.getMagic()<< " Mag\n" << endl;
+			cout << "\n";
+			cout << "'Let me help you, this is what I know of your opponent'\n";
+			cout <<  " \n" << "Name:\n" << spid.getName() << " \n" << spid.getHealth()<< " Hp\n" << spid.getAttack() << " Str\n" << spid.getDefense()<< " Def\n" << spid.getMagic()<< " Mag\n" << endl;
+			if (init == 1)
+			{
+				cout << "Your turn!\n";
+			}
+			while(wiza.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Hit with your staff \n 2 -> FIREBALL!!! \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						wiza.Staff(spid);   //Preguntar a Benji como imprimir los dos randoms en stats
+						cout << " \n"<< "You did " << wiza.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						wiza.Fireball(spid);
+						cout << " \n"<< "You did " << wiza.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						wiza.Guard(wiza);
+						cout << " \n"<< "You blocked " << wiza.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(wiza);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(wiza);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << wiza.getHealth() <<"!\n";
+				if (wiza.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+				else{
+					cout << "Your turn!\n";
+			while(wiza.getHealth() > 0 || spid.getHealth() > 0){
+				cout << "What's your decision?\n 1 -> Hit with your staff \n 2 -> FIREBALL!!! \n 3 -> Guard \n";
+				do{cin >> election;} while(election > 3 || election < 1);
+				switch(election){
+					case 1:
+						wiza.Staff(spid);   //Preguntar a Benji como imprimir los dos randoms en stats
+						cout << " \n"<< "You did " << wiza.getAttack()+30<< " damage\n" << endl;
+						break;
+					case 2:
+						wiza.Fireball(spid);
+						cout << " \n"<< "You did " << wiza.getMagic()+30<< " damage\n" << endl;
+						break;
+					case 3:
+						wiza.Guard(wiza);
+						cout << " \n"<< "You blocked " << wiza.getDefense()+30<< " damage\n" << endl;
+						break;
+				}
+				election = rand()%3;
+		
+				switch(election){
+		
+					case 1:
+						spid.Bite(wiza);
+						cout << "The monster dealt " << spid.getAttack() << " damage."<< endl;
+						break;
+					case 2:
+						spid.Venom(wiza);
+						cout << "The monster dealt " << spid.getMagic() << " damage."<< endl;
+						break;
+					case 3:
+						spid.Guard(spid);
+						cout << "The monster blocked " << spid.getDefense() << " damage."<< endl;
+						break;
+				
+				election = rand()%3;}
+				
+				cout << "The monster now has " << spid.getHealth() << " HP left.\n";
+				if(spid.getHealth() < 1){
+				cout << "You killed the monster! Beta completed!\n";
+				return 0;
+				}
+				cout << "Your current HP is " << wiza.getHealth() <<"!\n";
+				if (wiza.getHealth() < 1){
+					cout << "You died! The monster fled with " << spid.getHealth() << " HP left... GAME OVER\n";
+					return 0;
+				}
+			}
+			}
 			break;
 	}	
-	if (init == 1)
-	{
-		cout << "Your turn!\n";
-	}
-	while(hp > 0 || mhp > 0)
-	{
-		cout << "What's your decision?\n 1 -> Attack \n 2 -> Magic \n 3 -> Guard \n";
-		do{cin >> election;} while(election > 3 || election < 1);
-		switch(election)
-		{
-			case 1:
-				atk = rand()%20+30;
-				def = rand()%10+10;
-				agi = rand()%5;
-				break;
-			case 2:
-				atk = rand()%15+15;
-				def = rand()%10+10;
-				agi = rand()%10;
-				break;
-			case 3:
-				atk = rand()%10+10;
-				def = rand()%200+100;
-				agi = rand()%15;
-				break;
-		}	
-			election = rand()%3;
-		
-			switch(election){
-		
-			case 1:
-				matk = rand()%20+10;
-				mdef = rand()%10+10;
-				magi = rand()%5;
-				break;
-			case 2:
-				matk = rand()%5+10;
-				mdef = rand()%10+10;
-				magi = rand()%15;
-				break;
-			case 3:
-				matk = rand()%1+1;
-				mdef = rand()%300+300;
-				magi = rand()%15;
-				break;
-				
-			election = rand()%3;}
-			
-			mdamage =  (atk - magi) - (mdef/atk);
-			if (mdamage < 0) {
-				mdamage = 0;
-			}
-			mhp = mhp - mdamage;
-			cout << "You did " << mdamage << " damage to the monster!\n";
-			cin.get();
-			
-			if(mhp < 1){
-				cout << "You killed the monster! Beta completed!\n";
-				cin.get();
-				return 0;
-			}
-			
-			cout << "The monster now has " << mhp << " HP left.\n";
-			damage = (matk- agi) - (def/matk);
-			if(damage < 0)
-			{
-				damage = 0;
-			}
-			hp = hp - damage;
-			cout << "The monster dealt " << damage << " damage. Your current HP is " << hp <<"!\n";
-			if (hp<1){
-				cout << "You died! The monster fled with " << mhp << " HP left... GAME OVER\n";
-				cin.get();
-				return 0;
-			}
-			else
-	{
-				cout << "Your turn!\n";
-	
-	while(hp > 0 || mhp > 0)
-		{
-		cout << "What's your decision?\n 1 -> Attack \n 2 -> Magic \n 3 -> Guard \n";
-		do{cin >> election;} while(election > 3 || election < 1);
-		switch(election)
-		{
-			case 1:
-				atk = rand()%20+30;
-				def = rand()%10+10;
-				agi = rand()%5;
-				break;
-			case 2:
-				atk = rand()%15+15;
-				def = rand()%10+10;
-				agi = rand()%10;
-				break;
-			case 3:
-				atk = rand()%10+10;
-				def = rand()%200+100;
-				agi = rand()%15;
-				break;
-		}	
-			election = rand()%3;
-		
-			switch(election){
-		
-			case 1:
-				matk = rand()%20+10;
-				mdef = rand()%10+10;
-				magi = rand()%5;
-				break;
-			case 2:
-				matk = rand()%5+10;
-				mdef = rand()%10+10;
-				magi = rand()%15;
-				break;
-			case 3:
-				matk = rand()%1+1;
-				mdef = rand()%300+300;
-				magi = rand()%1;
-				break;
-				
-			election = rand()%3;}
-			mdamage =  (atk - magi) - (mdef/atk);
-			if (mdamage < 0) {
-				mdamage = 0;
-			}
-			mhp = mhp - mdamage;
-			cout << "You did " << mdamage << " damage to the monster!\n";
-			cin.get();
-			
-			if(mhp < 1){
-				cout << "You killed the monster! Beta completed!\n";
-				cin.get();
-				return 0;
-			}
-			
-			cout << "The monster now has " << mhp << " HP left.\n";
-			damage = (matk- agi) - (def/matk);
-			if(damage < 0)
-			{
-				damage = 0;
-			}
-			hp = hp - damage;
-			cout << "The monster dealt " << damage << " damage. Your current HP is " << hp <<"!\n";
-			if (hp<1)
-			{
-				cout << "You died! The monster fled with " << mhp << " HP left... GAME OVER\n";
-				cin.get();
-				return 0;
-			}	
-		}
-	}
-	}
+}
+}
+}
 }
