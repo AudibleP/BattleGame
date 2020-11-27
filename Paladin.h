@@ -1,41 +1,27 @@
+#ifndef PALADIN_H
+#define PALADIN_H
+
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include "rol.h"
+#include "monster.h"
 
-class Paladin
+class Paladin: public Rol
 {
-	private:
-		int def, atk, agi;
 	public:
-		Paladin(): def(0), atk(0), agi(0){};
-		Paladin(int defense, int attack, int agility): def(defense), atk(attack),agi(agility){};
-		
-		int get_def();
-		int get_atk();
-		int get_agi();
-		
-		void set_def(int);
-		void set_atk(int);
-		void set_agi(int);
+		Paladin(string nam):Rol(nam,200,10,50,25){
+			
+		}
+		void Sword(Monster &m){
+			m.damage(getAttack()+30);
+		}
+		void Smite(Monster &m){
+			m.damage(getMagic()+30);
+		}
+		void Guard(Rol &c){
+			c.guarding(getDefense()+30);
+		}
+
 };
-
-//Getters
-int Paladin::get_def(){
-	return def;
-}
-int Paladin::get_atk(){
-	return atk;
-}
-int Paladin::get_agi(){
-	return agi;
-}
-
-//SETTERS
-void Paladin::set_def(int d){
-	def = d;
-}
-void Paladin::set_atk(int at){
-	atk = at;
-}
-void Paladin::set_agi(int ag){
-	agi = ag;
-}
-
+#endif
