@@ -1,40 +1,28 @@
-#include <iostream>
+#ifndef HUNTER_H
+#define HUNTER_H
 
-class Hunter
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include "rol.h"
+#include "monster.h"
+
+class Hunter: public Rol
 {
-	private:
-		int def, atk, agi;
 	public:
-		Hunter(): def(0), atk(0), agi(0){};
-		Hunter(int defense, int attack, int agility):def(defense), atk(attack),agi(agility){};
-		
-		int get_def();
-		int get_atk();
-		int get_agi();
-		
-		void set_def(int);
-		void set_atk(int);
-		void set_agi(int);
+		Hunter(string nam):Rol(nam,150,40,20,15){
+			
+		}
+		void Bow(Monster &m){
+			m.damage(getAttack()+30);
+		}
+		void Arcane_Shot(Monster &m){
+			m.damage(getMagic()+30);
+		}
+		void Guard(Rol &c){
+			c.guarding(getDefense()+30);
+		}
+
 };
 
-//Getters
-int Hunter::get_def(){
-	return def;
-}
-int Hunter::get_atk(){
-	return atk;
-}
-int Hunter::get_agi(){
-	return agi;
-}
-
-//SETTERS
-void Hunter::set_def(int d){
-	def = d;
-}
-void Hunter::set_atk(int at){
-	atk = at;
-}
-void Hunter::set_agi(int ag){
-	agi = ag;
-}
+#endif
