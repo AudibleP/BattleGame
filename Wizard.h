@@ -1,40 +1,27 @@
+#ifndef WIZARD_H_H
+#define WIZARD_H
+
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
+#include "rol.h"
+#include "monster.h"
 
-class Wizard
+class Wizard: public Rol
 {
-	private:
-		int def, atk, agi;
 	public:
-		Wizard():def(0), atk(0), agi(0){};
-		Wizard(int defense, int attack, int agility): def(defense), atk(attack),agi(agility){};
-		
-		int get_def();
-		int get_atk();
-		int get_agi();
-		;
-		void set_def(int);
-		void set_atk(int);
-		void set_agi(int);
+		Wizard(string nam):Rol(nam,150,10,10,50){
+			
+		}
+		void Staff(Monster &m){
+			m.damage(getAttack()+30);
+		}
+		void Fireball(Monster &m){
+			m.damage(getMagic()+30);
+		}
+		void Guard(Rol &c){
+			c.guarding(getDefense()+30);
+		}
+
 };
-
-//Getters
-int Wizard::get_def(){
-	return def;
-}
-int Wizard::get_atk(){
-	return atk;
-}
-int Wizard::get_agi(){
-	return agi;
-}
-
-//SETTERS
-void Wizard::set_def(int d){
-	def = d;
-}
-void Wizard::set_atk(int at){
-	atk = at;
-}
-void Wizard::set_agi(int ag){
-	agi = ag;
-}
+#endif
