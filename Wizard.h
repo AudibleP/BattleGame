@@ -8,7 +8,7 @@ Proyecto final
 Clase Wizard, recibe elementos vacios de los stats y los llena
 Crea las acciones de los ataques y las guardias
 */
-#ifndef WIZARD_H_H
+#ifndef WIZARD_H
 #define WIZARD_H
 
 #include <cstdlib>
