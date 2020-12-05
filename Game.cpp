@@ -21,8 +21,6 @@ using namespace std;
 #include "wizard.h"
 #include "spider.h"
 
-//Stats random
-
 //Procedimiento del programa
 int main()
 {
