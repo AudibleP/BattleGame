@@ -1,5 +1,5 @@
 /*
-Ricardo Nuñez Alanís
+Ricardo Nuñez Alanis
 A01703259
 Programacion orientada a objetos
 Proyecto final
