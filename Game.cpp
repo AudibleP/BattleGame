@@ -7,6 +7,18 @@ Diciembre / 4 / 2020
 */
 /*
 Este proyecto se baso en crear una simple pelea de un based-turned RPG
+|------------------------------------------------------------------------------------------------------------------------------------------------|
+Casos de prueba:
+El la primera eleccion de casos:
+1 -> Paladin
+2 -> Hunter
+3 -> Wizard
+Despues de esto podras elegir diferentes acciones:
+1 -> Ataque Fisico
+2 -> Ataque Magico
+3 -> Defenderse o Curarse (Depende del movimiento del enemimgo)
+HAVE FUN!!!
+|------------------------------------------------------------------------------------------------------------------------------------------------|
 */
 //Bibliotecas
 #include <iostream> //imprimir
